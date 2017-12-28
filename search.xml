@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[花有重开日，人无再少年]]></title>
+      <url>/chengasd.github.io/2017/12/22/%E8%8A%B1%E6%9C%89%E9%87%8D%E5%BC%80%E6%97%A5%EF%BC%8C%E4%BA%BA%E6%97%A0%E5%86%8D%E5%B0%91%E5%B9%B4/</url>
+      <content type="html"><![CDATA[<img src="/chengasd.github.io/2017/12/22/花有重开日，人无再少年/1222.jpeg">
+<p>没有人再用孙子称呼我了。</p>
+<p>从来没想到一切来的这么的突然，3月才送走亲爱的奶奶，爷爷也从此刻离开了。</p>
+<p>7年漂泊在外，每年春节回去只知道呆在家里玩电脑，和朋友聚会，去看望爷爷奶奶的次数真的少之又少，现在真的想回报您们却没有机会了。</p>
+<a id="more"></a>
+<p>小时候在爷爷奶奶家玩，奶奶总是包着馄饨，做团子，爷爷下地种菜分给各家烧菜吃，一家人在门口刮丝瓜皮，画面都是那么的熟悉。我开始寄宿上高中，奶奶会塞钱给我让我自己买东西吃，看着手里零散的纸票钱，我知道这是您们天天起早跑到市场卖菜挣得血汗钱，省吃俭用地过日子，每年过年还是包红包给每个孙子，走的时候也没享受什么福，来不及向您们说声道谢，从不曾对您们说过一声谢谢，只希望在另外一个世界，您们可以不用再受苦了。</p>
+<p>对不起。</p>
+<pre><code>————记于 23号宝安机场
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> 生活 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[活动公共系统设计]]></title>
+      <url>/chengasd.github.io/2017/12/19/%E6%B4%BB%E5%8A%A8%E5%85%AC%E5%85%B1%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</url>
+      <content type="html"><![CDATA[<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>①单品、满减、搭售等各个活动信息都是独立的一套活动表。<br>②每次新增促销活动需要重新开发活动相关crud代码。<br>③不利于维护，代码冗余，无意义的重复开发较多。</p>
+<h2 id="1、整理后的活动公共字段"><a href="#1、整理后的活动公共字段" class="headerlink" title="1、整理后的活动公共字段"></a>1、整理后的活动公共字段</h2><h3 id="整理后活动可以分为五个维度"><a href="#整理后活动可以分为五个维度" class="headerlink" title="整理后活动可以分为五个维度"></a>整理后活动可以分为五个维度</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">维度</th>
+<th style="text-align:left">字段</th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">活动基本信息</td>
+<td style="text-align:left">活动名称</td>
+<td style="text-align:left">活动时间</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">活动作用域</td>
+<td style="text-align:left">Sku</td>
+<td style="text-align:left">Spu</td>
+<td style="text-align:left">品牌</td>
+<td style="text-align:left">类目</td>
+<td style="text-align:left">店铺</td>
+<td style="text-align:left">排除信息</td>
+</tr>
+<tr>
+<td style="text-align:left">促销条件</td>
+<td style="text-align:left">推广平台</td>
+<td style="text-align:left">订单金额</td>
+<td style="text-align:left">订单数量</td>
+<td style="text-align:left">用户等级</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">促销规则</td>
+<td style="text-align:left">库存限购规则</td>
+<td style="text-align:left">优惠金额限制</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">促销优惠</td>
+<td style="text-align:left">减N元</td>
+<td style="text-align:left">打N折</td>
+<td style="text-align:left">送赠品</td>
+<td style="text-align:left">N元促销</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<img src="/chengasd.github.io/2017/12/19/活动公共系统设计/活动公共系统.png" title="活动公共系统">
+<h3 id="活动公共系统字段设计"><a href="#活动公共系统字段设计" class="headerlink" title="活动公共系统字段设计"></a>活动公共系统字段设计</h3><img src="/chengasd.github.io/2017/12/19/活动公共系统设计/活动公共系统1.png" title="活动公共系统字段设计">
+]]></content>
+      
+        <categories>
+            
+            <category> 系统设计 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 设计 </tag>
+            
+            <tag> 活动公共 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
