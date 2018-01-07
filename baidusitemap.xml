@@ -4,16 +4,38 @@
 
     
   <url>
-    <loc>https://chengasd.github.io/chengasd.github.io/2018/01/07/shell%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A41/</loc>
-    <lastmod>2018-01-07T03:48:41.000Z</lastmod>
+    <loc>https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%B9%8Bwc/</loc>
+    <lastmod>2018-01-07T07:53:52.000Z</lastmod>
     <data>
         <display>
-        <title>shell常用命令1</title>
-        <pubTime>2018-01-07T03:39:29.000Z</pubTime>
+        <title>Linux 常用命令之wc</title>
+        <pubTime>2017-12-11T12:05:45.000Z</pubTime>
         
         <tag>命令</tag>
          
-        <tag>shell</tag>
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https://chengasd.github.io/chengasd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2018-01-07T07:30:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux 常用命令之grep、ps</title>
+        <pubTime>2017-12-10T14:39:29.000Z</pubTime>
+        
+        <tag>命令</tag>
+         
+        <tag>Linux</tag>
          
          
            
