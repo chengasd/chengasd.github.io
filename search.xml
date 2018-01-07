@@ -7,17 +7,19 @@
       <url>/chengasd.github.io/2018/01/01/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<img src="/chengasd.github.io/2018/01/01/vim-常用命令总结/2.jpg">
 <h2 id="启动vim"><a href="#启动vim" class="headerlink" title="启动vim"></a>启动vim</h2><p>在命令行窗口输入以下命令即可<br>vim 直接启动vim<br>vim 文件名 打开vim并创建对应文件名的文件</p>
+<a id="more"></a>
 <h2 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h2><p>vim file 打开单个文件<br>vim file1 file2 file3 同时打开多个文件<br>:open file 在vim窗口中打开新文件<br>:bn 切换到下一个文件<br>:bp 切换到上一个文件<br>:args 查看当前打开的文件列表<br>:e ftp://192.168.0.1/aaa.txt 打开远程文件</p>
 <h2 id="vim模式"><a href="#vim模式" class="headerlink" title="vim模式"></a>vim模式</h2><p>命令模式（vi 文件名 进入）<br>插入模式（按i键进入） 左下角显示–INSERT–<br>编辑模式（按:键进入） </p>
-<a id="more"></a>
 <h2 id="基本编辑"><a href="#基本编辑" class="headerlink" title="基本编辑"></a>基本编辑</h2><p>a       在当前光标后插入文本<br>A       在本行行尾插入文本<br>i       在当前光标前插入文本<br>I       在本行行前插入文本<br>o       在光标下插入新行<br>O       在光标上插入新行</p>
 <h2 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h2><p>hjkl    光标移动1位，分别代表上、下、左、右<br>数字0    光标移动到本行开头<br>^       光标移动到第一个非空字符<br>$       光标移动到本行行尾<br>w       光标移动到下一个单词或标点开头<br>W       光标移动到下一个单词开头 忽略标点<br>b       光标移动到上一个单词或标点开头<br>B       光标移动到上一个单词开头 忽略标点<br>ctrl+f  光标下翻一页<br>ctrl+b  光标上翻一页<br>ctrl+d  光标下翻半页<br>ctrl+u  光标上翻半页<br>nG      光标移至第n行<br>G       光标移至最后一行<br>n+      光标向下跳n行<br>n-      光标向上跳n行<br>H       光标移至当前屏幕的第一行<br>L       光标移至当前屏幕的最后一行</p>
 <h2 id="删除和撤销"><a href="#删除和撤销" class="headerlink" title="删除和撤销"></a>删除和撤销</h2><p>x       删除当前字符（剪切）<br>nx      向后删除当前行内的n个字符（剪切）<br>dd      删除当前行（剪切）<br>ndd     向下删除当前行在内的n行（剪切）<br>dW      删除当前单词（剪切）<br>d$      删除当前字符到当前行的末尾（剪切）<br>d0      删除当前字符到当前行的行头（剪切）<br>d^      删除当前字符到下一个非空字符（剪切）<br>dG      删除当前行到文件末尾（剪切）<br>u       撤销上一次操作<br>U       撤销当前行的所有操作<br>ctrl+r  撤销的撤销</p>
 <h2 id="剪切、复制和粘贴"><a href="#剪切、复制和粘贴" class="headerlink" title="剪切、复制和粘贴"></a>剪切、复制和粘贴</h2><blockquote>
-<p>x和d键实质上是剪切键。 y是复制键，p是粘贴键<br>p       粘贴到当前行后面<br>P       粘贴到当前行前面<br>yy      复制当前行<br>nyy     向下复制当前行在内的n行<br>yw      当前字符到下一单词的起始处<br>y$      当前字符到当前行的末尾<br>y^      当前字符到当前行下一个非空字符<br>y0      当前字符到当前行的行首<br>yG      当前行到文件末尾<br><img src="/chengasd.github.io/2018/01/01/vim-常用命令总结/1.png"></p>
+<p>x和d键实质上是剪切键。 y是复制键，p是粘贴键</p>
 </blockquote>
+<p>p       粘贴到当前行后面<br>P       粘贴到当前行前面<br>yy      复制当前行<br>nyy     向下复制当前行在内的n行<br>yw      当前字符到下一单词的起始处<br>y$      当前字符到当前行的末尾<br>y^      当前字符到当前行下一个非空字符<br>y0      当前字符到当前行的行首<br>yG      当前行到文件末尾</p>
 <h2 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h2><p>fx      光标移至本行下一处出现字符x的位置，输入分号重复上一次搜索<br>/       使用/命令后，输入要搜索的单词或短语，enter结束, n往下查询,N往上查询<br>:s/old/new      用new替换行中首次出现的old（:分号用于启动一条ex命令）<br>:s/old/new/g    用new替换行中所有的old<br>:n,m s/old/new/g用new替换从n到m行里所有的old<br>:%s/old/new/g   用new替换当前文件里所有的old<br>:set nu         显示行号<br>:set nonu       取消显示行号</p>
 <h2 id="保存退出"><a href="#保存退出" class="headerlink" title="保存退出"></a>保存退出</h2><p>:w      仅保存文件<br>:q      退出文件，没有修改<br>:q!     放弃修改并推出文件<br>:wq     保存并退出文件<br>:w file1文件另存为file1<br>ZZ      保存并退出文件</p>
+<img src="/chengasd.github.io/2018/01/01/vim-常用命令总结/1.png">
 ]]></content>
       
         <categories>
