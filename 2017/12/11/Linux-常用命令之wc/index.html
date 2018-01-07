@@ -81,16 +81,18 @@
 
 <meta name="keywords" content="命令,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 常用命令之wc">
+<meta property="og:title" content="Linux 常用命令之wc、sort">
 <meta property="og:url" content="https://chengasd.github.io/2017/12/11/Linux-常用命令之wc/index.html">
 <meta property="og:site_name" content="米夏埃尔">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/1.jpeg">
 <meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/wc.png">
 <meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/wc1.png">
-<meta property="og:updated_time" content="2018-01-07T07:53:52.000Z">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/sort.png">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/sort2.png">
+<meta property="og:updated_time" content="2018-01-07T08:49:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 常用命令之wc">
+<meta name="twitter:title" content="Linux 常用命令之wc、sort">
 <meta name="twitter:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/11/Linux-常用命令之wc/1.jpeg">
 
 
@@ -127,7 +129,7 @@
 
 
 
-  <title>Linux 常用命令之wc | 米夏埃尔</title>
+  <title>Linux 常用命令之wc、sort | 米夏埃尔</title>
   
 
 
@@ -317,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux 常用命令之wc</h1>
+          <h1 class="post-title" itemprop="name headline">Linux 常用命令之wc、sort</h1>
         
 
         <div class="post-meta">
@@ -388,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  141
+                  467
                 </span>
               
 
@@ -404,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -433,7 +435,8 @@
 <h3 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h3><ul>
 <li>c 统计字节数。</li>
 <li>l 统计行数。</li>
-<li>w 统计字数。</li>
+<li>w 统计单词数。</li>
+<li>m 统计字符数</li>
 </ul>
 <p>-lcw 组合使用按行数、字数、字节数、文件名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc －lcw filename1</span><br></pre></td></tr></table></figure></p>
 <img src="/chengasd.github.io/2017/12/11/Linux-常用命令之wc/wc.png">
@@ -441,6 +444,23 @@
 <p>2、统计vim目录下所有txt文件的行数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find vim/ -name &quot;*.txt&quot; | xargs cat | wc -l</span><br></pre></td></tr></table></figure></p>
 <p>3、统计vim目录下所有txt文件排除以1开头的行数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find vim/ -name &quot;*.txt&quot; | xargs cat | grep -v ^1 | wc -l</span><br></pre></td></tr></table></figure></p>
 <img src="/chengasd.github.io/2017/12/11/Linux-常用命令之wc/wc1.png">
+<h2 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a>sort命令</h2><blockquote>
+<p>sort命令可以进行排序，并将排序结果标准输出</p>
+</blockquote>
+<h3 id="命令参数-1"><a href="#命令参数-1" class="headerlink" title="命令参数"></a>命令参数</h3><ul>
+<li>u 排序并且排除重复项</li>
+<li>r 反向排序，即降序</li>
+<li>o 可以将排序结果输出到源文件中</li>
+<li>n 原来数字是按照字符串进行排序，－n采用数字大小进行排序</li>
+<li>t 指定分隔符</li>
+<li>k 指定哪一个分割区域进行排序</li>
+</ul>
+<h3 id="常用场景-1"><a href="#常用场景-1" class="headerlink" title="常用场景"></a>常用场景</h3><p>1、对文件内容进行排序  顺序   sort filename<br>2、采用数字规则对文件内容进行排序  顺序  sort -n filename<br>3、采用数字规则对文件内容进行降序排序    sort -n -r filename<br>4、按照：分号进行分割后取第四块数字进行排序  sort -n -k 4 -t : filename<br>5、将排序结果保存到源文件中  sort -n filename -o filename </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sort filename</span><br><span class="line">sort -n filename</span><br><span class="line">sort -n -r filename</span><br><span class="line">sort -n -k 4 -t : filename</span><br><span class="line">sort -n -k 4 -t : filename -o filename</span><br></pre></td></tr></table></figure>
+<img src="/chengasd.github.io/2017/12/11/Linux-常用命令之wc/sort.png">
+<p>1、按数字统计sort.txt 并列出没行的重复次数。<br>2、按重复次数 降序 统计sort.txt中的排序<br>3、取2中的统计结果的前3条数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sort -n sort.txt | uniq -c </span><br><span class="line">sort -n sort.txt | uniq -c | sort -k 1 -n -r</span><br><span class="line">sort -n sort.txt | uniq -c | sort -k 1 -n -r | head -3</span><br></pre></td></tr></table></figure>
+<img src="/chengasd.github.io/2017/12/11/Linux-常用命令之wc/sort2.png">
 
       
     </div>
@@ -642,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#wc命令"><span class="nav-number">1.</span> <span class="nav-text">wc命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令参数"><span class="nav-number">1.1.</span> <span class="nav-text">命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用场景"><span class="nav-number">1.2.</span> <span class="nav-text">常用场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#wc命令"><span class="nav-number">1.</span> <span class="nav-text">wc命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令参数"><span class="nav-number">1.1.</span> <span class="nav-text">命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用场景"><span class="nav-number">1.2.</span> <span class="nav-text">常用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort命令"><span class="nav-number">2.</span> <span class="nav-text">sort命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令参数-1"><span class="nav-number">2.1.</span> <span class="nav-text">命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用场景-1"><span class="nav-number">2.2.</span> <span class="nav-text">常用场景</span></a></li></ol></li></ol></div>
             
 
           </div>
