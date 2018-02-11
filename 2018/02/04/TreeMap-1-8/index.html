@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/chengasd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/chengasd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/chengasd.github.io/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/chengasd.github.io/images/mia2.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/chengasd.github.io/images/mia.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/chengasd.github.io/images/mia.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/chengasd.github.io/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="源码,TreeMap," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="红黑树红黑树特征1、每个节点不是红色就是黑色2、根节点总是黑色的3、如果节点是红色的，那么他的字节点必须是红色的4、从根节点到叶子节点或者空字节点每条路径的黑色节点数必须相同。">
+<meta name="keywords" content="源码,TreeMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TreeMap-1.8">
+<meta property="og:url" content="https://chengasd.github.io/2018/02/04/TreeMap-1-8/index.html">
+<meta property="og:site_name" content="米夏埃尔">
+<meta property="og:description" content="红黑树红黑树特征1、每个节点不是红色就是黑色2、根节点总是黑色的3、如果节点是红色的，那么他的字节点必须是红色的4、从根节点到叶子节点或者空字节点每条路径的黑色节点数必须相同。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/left.jpg">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/right.jpg">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/o.png">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/1.jpg">
+<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/delete.png">
+<meta property="og:updated_time" content="2018-02-11T07:25:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TreeMap-1.8">
+<meta name="twitter:description" content="红黑树红黑树特征1、每个节点不是红色就是黑色2、根节点总是黑色的3、如果节点是红色的，那么他的字节点必须是红色的4、从根节点到叶子节点或者空字节点每条路径的黑色节点数必须相同。">
+<meta name="twitter:image" content="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/left.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/chengasd.github.io/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chengasd.github.io/2018/02/04/TreeMap-1-8/"/>
+
+
+
+
+
+  <title>TreeMap-1.8 | 米夏埃尔</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/chengasd" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style> 
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/chengasd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">米夏埃尔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一天进步一点</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/chengasd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/chengasd.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/chengasd.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/chengasd.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/chengasd.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chengasd.github.io/chengasd.github.io/2018/02/04/TreeMap-1-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/chengasd.github.io/images/mia.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米夏埃尔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TreeMap-1.8</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T15:29:09+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/chengasd.github.io/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,654
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h4 id="红黑树特征"><a href="#红黑树特征" class="headerlink" title="红黑树特征"></a>红黑树特征</h4><p>1、每个节点不是红色就是黑色<br>2、根节点总是黑色的<br>3、如果节点是红色的，那么他的字节点必须是红色的<br>4、从根节点到叶子节点或者空字节点每条路径的黑色节点数必须相同。</p>
+<a id="more"></a>
+<blockquote>
+<p>在红黑树中插入的节点都是红色的。 why?</p>
+</blockquote>
+<p>因为插入一个红色节点比插入一个黑色节点违背规则的可能性更小，因为插入一个黑色节点会违背规则4，而插入红色节点只有一半的机会违背规则3。</p>
+<blockquote>
+<p>如何修正红黑树？</p>
+</blockquote>
+<p>修复过程＝&gt; 先变色 ＝&gt; 左旋 =&gt; 右旋</p>
+<blockquote>
+<p>如何寻找到给定节点t的后继(即大于t的最小元素)</p>
+</blockquote>
+<p>1、t的右孩子不为空，则t的后继是其右子树中最小的元素。<br>2、t的右孩子为空，则t的后继是其查祖父节点中第一个往左走的元素<br>3、详见successor静态方法</p>
+<h3 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h3><h4 id="左旋rotateLeft"><a href="#左旋rotateLeft" class="headerlink" title="左旋rotateLeft"></a>左旋rotateLeft</h4><p>被旋转的节点p 左旋后将变成一个左节点。<br>              k = p.parent           k<br>            /                       /<br>           p                       r<br>          / \                     / \<br>         lx  r      —–&gt;       p  rr<br>            / \                 / \<br>           lr rr               lx lr<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">rotateLeft</span><span class="params">(Entry&lt;K,V&gt; p)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (p != <span class="keyword">null</span>) &#123;</span><br><span class="line">         Entry&lt;K,V&gt; r = p.right;</span><br><span class="line">         p.right = r.left;</span><br><span class="line">         <span class="keyword">if</span> (r.left != <span class="keyword">null</span>)</span><br><span class="line">             r.left.parent = p;</span><br><span class="line">         r.parent = p.parent;</span><br><span class="line">         <span class="keyword">if</span> (p.parent == <span class="keyword">null</span>)</span><br><span class="line">             root = r;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (p.parent.left == p)</span><br><span class="line">             p.parent.left = r;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">             p.parent.right = r;</span><br><span class="line">         r.left = p;</span><br><span class="line">         p.parent = r;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<img src="/chengasd.github.io/2018/02/04/TreeMap-1-8/left.jpg">
+<h4 id="右旋rotateRight"><a href="#右旋rotateRight" class="headerlink" title="右旋rotateRight"></a>右旋rotateRight</h4><p>被旋转的节点p 右旋后将变成一个右节点。</p>
+<pre><code>      k = p.parent        k            
+     /                   / 
+    p                   l 
+   / \                 / \ 
+  l  pr   -----&gt;      ll  p 
+ / \                     / \ 
+ll  lr                  lr pr 
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">rotateRight</span><span class="params">(Entry&lt;K,V&gt; p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; l = p.left;</span><br><span class="line">            p.left = l.right;</span><br><span class="line">            <span class="keyword">if</span> (l.right != <span class="keyword">null</span>) l.right.parent = p;</span><br><span class="line">            l.parent = p.parent;</span><br><span class="line">            <span class="keyword">if</span> (p.parent == <span class="keyword">null</span>)</span><br><span class="line">                root = l;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p.parent.right == p)</span><br><span class="line">                p.parent.right = l;</span><br><span class="line">            <span class="keyword">else</span> p.parent.left = l;</span><br><span class="line">            l.right = p;</span><br><span class="line">            p.parent = l;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<img src="/chengasd.github.io/2018/02/04/TreeMap-1-8/right.jpg">
+<h4 id="获取元素getEntry"><a href="#获取元素getEntry" class="headerlink" title="获取元素getEntry"></a>获取元素getEntry</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> Entry&lt;K,V&gt; <span class="title">getEntry</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">//first:从根基点开始遍历</span></span><br><span class="line">    Entry&lt;K,V&gt; p = root;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> cmp = k.compareTo(p.key);</span><br><span class="line">        <span class="comment">//second:比较  1、小的则在左边left</span></span><br><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</span><br><span class="line">            p = p.left;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="comment">//2、大的则在右边</span></span><br><span class="line">            p = p.right;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="寻找后继节点successor方法"><a href="#寻找后继节点successor方法" class="headerlink" title="寻找后继节点successor方法"></a>寻找后继节点successor方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;K,V&gt; TreeMap.<span class="function">Entry&lt;K,V&gt; <span class="title">successor</span><span class="params">(Entry&lt;K,V&gt; t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (t.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//情况1 ： 如果t有右孩子，则后继节点则为右孩子中最小的元素。 一路往左查</span></span><br><span class="line">        Entry&lt;K,V&gt; p = t.right;</span><br><span class="line">        <span class="keyword">while</span> (p.left != <span class="keyword">null</span>)</span><br><span class="line">            p = p.left;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//情况2 ： 如果t没有右孩子，则一直查祖父节点，后继节点则为第一个往左走的元素</span></span><br><span class="line">        Entry&lt;K,V&gt; p = t.parent;</span><br><span class="line">        Entry&lt;K,V&gt; ch = t;</span><br><span class="line">        <span class="keyword">while</span> (p != <span class="keyword">null</span> &amp;&amp; ch == p.right) &#123;</span><br><span class="line">            ch = p;</span><br><span class="line">            p = p.parent;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/chengasd.github.io/2018/02/04/TreeMap-1-8/o.png">
+<h4 id="插入修正fixAfterDeletion"><a href="#插入修正fixAfterDeletion" class="headerlink" title="插入修正fixAfterDeletion"></a>插入修正fixAfterDeletion</h4><p>具体代码流程如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fixAfterInsertion</span><span class="params">(Entry&lt;K,V&gt; x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1、新加的节点为红色</span></span><br><span class="line">        x.color = RED;</span><br><span class="line">        <span class="comment">//2、如果父节点为红色</span></span><br><span class="line">        <span class="keyword">while</span> (x != <span class="keyword">null</span> &amp;&amp; x != root &amp;&amp; x.parent.color == RED) &#123;</span><br><span class="line">            <span class="keyword">if</span> (parentOf(x) == leftOf(parentOf(parentOf(x)))) &#123;</span><br><span class="line">                Entry&lt;K,V&gt; y = rightOf(parentOf(parentOf(x)));</span><br><span class="line">                <span class="comment">//3、y为x新节点的叔叔节点 且为红色   </span></span><br><span class="line">                <span class="keyword">if</span> (colorOf(y) == RED) &#123;</span><br><span class="line">                    <span class="comment">// 变色场景 父节点变黑，叔叔节点变黑祖父节点变红</span></span><br><span class="line">                    setColor(parentOf(x), BLACK);         </span><br><span class="line">                    setColor(y, BLACK);                   </span><br><span class="line">                    setColor(parentOf(parentOf(x)), RED); </span><br><span class="line">                    x = parentOf(parentOf(x));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//4、叔叔节点为黑色</span></span><br><span class="line">                    <span class="keyword">if</span> (x == rightOf(parentOf(x))) &#123;</span><br><span class="line">                        <span class="comment">//4-1 如果x节点为父节点的右子节点 ，则以父节点做左旋操作</span></span><br><span class="line">                        x = parentOf(x);</span><br><span class="line">                        rotateLeft(x);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//4-2 如果x节点为父节点的左子节点 ，先将父节点设黑 ，祖父节点设红，按祖父节点做右旋操作</span></span><br><span class="line">                    setColor(parentOf(x), BLACK);</span><br><span class="line">                    setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                    rotateRight(parentOf(parentOf(x)));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Entry&lt;K,V&gt; y = leftOf(parentOf(parentOf(x)));</span><br><span class="line">                <span class="keyword">if</span> (colorOf(y) == RED) &#123;</span><br><span class="line">                    setColor(parentOf(x), BLACK);</span><br><span class="line">                    setColor(y, BLACK);</span><br><span class="line">                    setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                    x = parentOf(parentOf(x));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (x == leftOf(parentOf(x))) &#123;</span><br><span class="line">                        x = parentOf(x);</span><br><span class="line">                        rotateRight(x);</span><br><span class="line">                    &#125;</span><br><span class="line">                    setColor(parentOf(x), BLACK);</span><br><span class="line">                    setColor(parentOf(parentOf(x)), RED);</span><br><span class="line">                    rotateLeft(parentOf(parentOf(x)));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        root.color = BLACK;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<img src="/chengasd.github.io/2018/02/04/TreeMap-1-8/1.jpg">
+<h4 id="删除元素deleteEntry"><a href="#删除元素deleteEntry" class="headerlink" title="删除元素deleteEntry"></a>删除元素deleteEntry</h4><p>逻辑主要：1、找出删除节点对应的后继节点。<br>        2、将后继节点的内容覆盖到删除及节点。<br>        3、删除后继节点位置的内容，并修改父子节点间引用关系的变更。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deleteEntry</span><span class="params">(Entry&lt;K,V&gt; p)</span> </span>&#123;</span><br><span class="line">        modCount++;     <span class="comment">//1、结构修改次数++</span></span><br><span class="line">        size--;         <span class="comment">//2、总元素个数－－</span></span><br><span class="line">        <span class="comment">//1、如果删除的节点有孩子节点，则找出后继节点</span></span><br><span class="line">        <span class="keyword">if</span> (p.left != <span class="keyword">null</span> &amp;&amp; p.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; s = successor(p);</span><br><span class="line">            p.key = s.key;</span><br><span class="line">            p.value = s.value;</span><br><span class="line">            <span class="comment">//2、将要删除节点和后继节点的值替换下，颜色不替换。</span></span><br><span class="line">            p = s;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">//3、如果要删除的节点(有后继节点则为后继节点位置)有孩子节点，则关联该孩子节点。</span></span><br><span class="line">        Entry&lt;K,V&gt; replacement = (p.left != <span class="keyword">null</span> ? p.left : p.right);</span><br><span class="line">        <span class="keyword">if</span> (replacement != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//4、将后继节点位置的父节点关联该孩子节点</span></span><br><span class="line">            ...</span><br><span class="line">            <span class="comment">//5、如果后继节点的颜色是黑色的，则要做调整。</span></span><br><span class="line">            <span class="keyword">if</span> (p.color == BLACK)</span><br><span class="line">                fixAfterDeletion(replacement);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p.parent == <span class="keyword">null</span>) &#123; </span><br><span class="line">            root = <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="comment">//6、如果要删除的节点(有后继节点则为后继节点位置)没有孩子节点</span></span><br><span class="line">            <span class="comment">//如果是黑色的也做颜色调整</span></span><br><span class="line">            <span class="keyword">if</span> (p.color == BLACK)</span><br><span class="line">                fixAfterDeletion(p);</span><br><span class="line">            <span class="comment">//7、从将父节点的孩子节点内容剔除掉</span></span><br><span class="line">            <span class="keyword">if</span> (p.parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (p == p.parent.left)</span><br><span class="line">                    p.parent.left = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (p == p.parent.right)</span><br><span class="line">                    p.parent.right = <span class="keyword">null</span>;</span><br><span class="line">                p.parent = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="删除修正fixAfterDeletion"><a href="#删除修正fixAfterDeletion" class="headerlink" title="删除修正fixAfterDeletion"></a>删除修正fixAfterDeletion</h4><p>具体代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fixAfterDeletion</span><span class="params">(Entry&lt;K,V&gt; x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x != root &amp;&amp; colorOf(x) == BLACK) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x == leftOf(parentOf(x))) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; sib = rightOf(parentOf(x));</span><br><span class="line">            <span class="comment">//情况1:</span></span><br><span class="line">            <span class="keyword">if</span> (colorOf(sib) == RED) &#123;</span><br><span class="line">                <span class="comment">//1、如果现在的兄弟节点是红色的</span></span><br><span class="line">                <span class="comment">//2、将兄弟节点设为黑色的，父节点设为红色的。</span></span><br><span class="line">                setColor(sib, BLACK);</span><br><span class="line">                setColor(parentOf(x), RED);</span><br><span class="line">                <span class="comment">//3、左旋该父节点</span></span><br><span class="line">                rotateLeft(parentOf(x));</span><br><span class="line">                sib = rightOf(parentOf(x));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//情况2:</span></span><br><span class="line">            <span class="keyword">if</span> (colorOf(leftOf(sib))  == BLACK &amp;&amp;</span><br><span class="line">                colorOf(rightOf(sib)) == BLACK) &#123;</span><br><span class="line">                setColor(sib, RED);</span><br><span class="line">                x = parentOf(x);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (colorOf(rightOf(sib)) == BLACK) &#123;</span><br><span class="line">                <span class="comment">//情况3:</span></span><br><span class="line">                    setColor(leftOf(sib), BLACK);</span><br><span class="line">                    setColor(sib, RED);</span><br><span class="line">                    rotateRight(sib);</span><br><span class="line">                    sib = rightOf(parentOf(x));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//情况4:</span></span><br><span class="line">                setColor(sib, colorOf(parentOf(x)));</span><br><span class="line">                setColor(parentOf(x), BLACK);</span><br><span class="line">                setColor(rightOf(sib), BLACK);</span><br><span class="line">                rotateLeft(parentOf(x));</span><br><span class="line">                x = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="comment">//对称，处理类似。            </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setColor(x, BLACK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<img src="/chengasd.github.io/2018/02/04/TreeMap-1-8/delete.png">
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/CarpenterLee/p/5503882.html" target="_blank" rel="noopener">史上最清晰的红黑树讲解</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/chengasd.github.io/tags/源码/" rel="tag"><i class="fa fa-tag"></i> 源码</a>
+          
+            <a href="/chengasd.github.io/tags/TreeMap/" rel="tag"><i class="fa fa-tag"></i> TreeMap</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/chengasd.github.io/2018/01/28/HashMap-1-8版/" rel="next" title="HashMap-1.8版">
+                <i class="fa fa-chevron-left"></i> HashMap-1.8版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjc1NS85MzE2"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/chengasd.github.io/images/mia.jpg"
+                alt="mia" />
+            
+              <p class="site-author-name" itemprop="name">mia</p>
+              <p class="site-description motion-element" itemprop="description">花有重开日，人无再少年</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/chengasd.github.io/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/chengasd.github.io/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/chengasd.github.io/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/chengasd" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:735712836@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树"><span class="nav-number">1.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#红黑树特征"><span class="nav-number">1.1.</span> <span class="nav-text">红黑树特征</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员方法"><span class="nav-number">2.</span> <span class="nav-text">成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左旋rotateLeft"><span class="nav-number">2.1.</span> <span class="nav-text">左旋rotateLeft</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#右旋rotateRight"><span class="nav-number">2.2.</span> <span class="nav-text">右旋rotateRight</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取元素getEntry"><span class="nav-number">2.3.</span> <span class="nav-text">获取元素getEntry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找后继节点successor方法"><span class="nav-number">2.4.</span> <span class="nav-text">寻找后继节点successor方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入修正fixAfterDeletion"><span class="nav-number">2.5.</span> <span class="nav-text">插入修正fixAfterDeletion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除元素deleteEntry"><span class="nav-number">2.6.</span> <span class="nav-text">删除元素deleteEntry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除修正fixAfterDeletion"><span class="nav-number">2.7.</span> <span class="nav-text">删除修正fixAfterDeletion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">mia-个人专属</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">博客 </div>
+
+<div>
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/chengasd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/chengasd.github.io/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/chengasd.github.io/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/chengasd.github.io/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/chengasd.github.io/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/chengasd.github.io/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/chengasd.github.io/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
