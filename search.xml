@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Btrace使用]]></title>
       <url>/chengasd.github.io/2018/07/30/Btrace%E4%BD%BF%E7%94%A8/</url>
-      <content type="html"><![CDATA[<h2 id="Btrace使用"><a href="#Btrace使用" class="headerlink" title="Btrace使用"></a>Btrace使用</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>BTrace是sun公司推出的一款Java 动态、安全追踪（监控）工具，可以在不用重启的情况下监控系统运行情况，方便的获取程序运行时的数据信息，如方法参数、返回值、全局变量和堆栈信息等，并且做到最少的侵入，占用最少的系统资源。<br><img src="/chengasd.github.io/2018/07/30/Btrace使用/1.jpg"><br><a id="more"></a></p>
+      <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>BTrace是sun公司推出的一款Java 动态、安全追踪（监控）工具，可以在不用重启的情况下监控系统运行情况，方便的获取程序运行时的数据信息，如方法参数、返回值、全局变量和堆栈信息等，并且做到最少的侵入，占用最少的系统资源。<br><img src="/chengasd.github.io/2018/07/30/Btrace使用/1.jpg"><br><a id="more"></a></p>
 <p>由于Btrace会把脚本逻辑直接侵入到运行的代码中，所以在使用上做很多限制：</p>
 <ol>
 <li>不能创建对象</li>
@@ -60,7 +60,7 @@
     <entry>
       <title><![CDATA[ab压测]]></title>
       <url>/chengasd.github.io/2018/07/27/ab%E5%8E%8B%E6%B5%8B/</url>
-      <content type="html"><![CDATA[<h2 id="ab压测"><a href="#ab压测" class="headerlink" title="ab压测"></a>ab压测</h2><h3 id="1、参数说明"><a href="#1、参数说明" class="headerlink" title="1、参数说明"></a>1、参数说明</h3><p>-n  即requests，压测的总请求数<br>-c  即concurrency，压测的并发数<br>-t  即timelimit，等待响应的最大时间<br>-p  即postfile，模拟post请求，配合-T使用<br>-T  即content-type，post数据所使用的Content-Type头信息，如’application/json’<br>-C  添加cookie信息<br>-H  添加任意的请求头<br>-e  filename，输出到对应csv文件中</p>
+      <content type="html"><![CDATA[<h3 id="1、参数说明"><a href="#1、参数说明" class="headerlink" title="1、参数说明"></a>1、参数说明</h3><p>-n  即requests，压测的总请求数<br>-c  即concurrency，压测的并发数<br>-t  即timelimit，等待响应的最大时间<br>-p  即postfile，模拟post请求，配合-T使用<br>-T  即content-type，post数据所使用的Content-Type头信息，如’application/json’<br>-C  添加cookie信息<br>-H  添加任意的请求头<br>-e  filename，输出到对应csv文件中</p>
 <img src="/chengasd.github.io/2018/07/27/ab压测/1.jpg">
 <a id="more"></a>
 <h3 id="2、模拟get请求"><a href="#2、模拟get请求" class="headerlink" title="2、模拟get请求"></a>2、模拟get请求</h3><p>直接在url后面带参数即可<br>ab -c 10 -n 10 <a href="http://www.xxxx.api.com/?gid=2" target="_blank" rel="noopener">http://www.xxxx.api.com/?gid=2</a></p>
