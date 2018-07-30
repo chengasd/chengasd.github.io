@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="米夏埃尔">
 <meta property="og:description" content="1、参数说明-n  即requests，压测的总请求数-c  即concurrency，压测的并发数-t  即timelimit，等待响应的最大时间-p  即postfile，模拟post请求，配合-T使用-T  即content-type，post数据所使用的Content-Type头信息，如’application/json’-C  添加cookie信息-H  添加任意的请求头-e  file">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2018/07/27/ab压测/1.jpg">
-<meta property="og:updated_time" content="2018-07-30T07:26:10.821Z">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/ab%E5%8E%8B%E6%B5%8B/1.jpg">
+<meta property="og:updated_time" content="2018-07-30T08:00:29.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ab压测">
 <meta name="twitter:description" content="1、参数说明-n  即requests，压测的总请求数-c  即concurrency，压测的并发数-t  即timelimit，等待响应的最大时间-p  即postfile，模拟post请求，配合-T使用-T  即content-type，post数据所使用的Content-Type头信息，如’application/json’-C  添加cookie信息-H  添加任意的请求头-e  file">
-<meta name="twitter:image" content="https://chengasd.github.io/chengasd.github.io/2018/07/27/ab压测/1.jpg">
+<meta name="twitter:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/ab%E5%8E%8B%E6%B5%8B/1.jpg">
 
 
 
@@ -427,8 +427,7 @@
 
       
         <h3 id="1、参数说明"><a href="#1、参数说明" class="headerlink" title="1、参数说明"></a>1、参数说明</h3><p>-n  即requests，压测的总请求数<br>-c  即concurrency，压测的并发数<br>-t  即timelimit，等待响应的最大时间<br>-p  即postfile，模拟post请求，配合-T使用<br>-T  即content-type，post数据所使用的Content-Type头信息，如’application/json’<br>-C  添加cookie信息<br>-H  添加任意的请求头<br>-e  filename，输出到对应csv文件中</p>
-<img src="/chengasd.github.io/2018/07/27/ab压测/1.jpg">
-<a id="more"></a>
+<p><img 27="" 2018="" src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/ab%E5%8E%8B%E6%B5%8B/1.jpg" alt="<img src=" chengasd.github.io="" 07="" ab压测="" 1.jpg"="">"><br><a id="more"></a></p>
 <h3 id="2、模拟get请求"><a href="#2、模拟get请求" class="headerlink" title="2、模拟get请求"></a>2、模拟get请求</h3><p>直接在url后面带参数即可<br>ab -c 10 -n 10 <a href="http://www.xxxx.api.com/?gid=2" target="_blank" rel="noopener">http://www.xxxx.api.com/?gid=2</a></p>
 <h3 id="3、模拟post请求"><a href="#3、模拟post请求" class="headerlink" title="3、模拟post请求"></a>3、模拟post请求</h3><p>需在请求目录内新建post.txt文件加上请求参数<br>ab -n 40  -c 10 -p ‘post.txt’ -T ‘application/json’ ‘<a href="http://10.0.2.228:9204/osp/api/remit/findRemitOrders" target="_blank" rel="noopener">http://10.0.2.228:9204/osp/api/remit/findRemitOrders</a>‘</p>
 <h3 id="4、常见问题"><a href="#4、常见问题" class="headerlink" title="4、常见问题"></a>4、常见问题</h3><h4 id="4-1-压测需要登陆用户"><a href="#4-1-压测需要登陆用户" class="headerlink" title="4-1 压测需要登陆用户"></a>4-1 压测需要登陆用户</h4><p>先用账户和密码登录后，用开发者工具找到标识这个会话的Cookie值（Session ID）记下来</p>

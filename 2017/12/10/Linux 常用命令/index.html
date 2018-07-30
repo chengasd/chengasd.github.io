@@ -85,16 +85,16 @@
 <meta property="og:url" content="https://chengasd.github.io/2017/12/10/Linux 常用命令/index.html">
 <meta property="og:site_name" content="米夏埃尔">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/1.jpeg">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/grep.png">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/grep2.png">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/grep3.png">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/ps1.png">
-<meta property="og:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/ps2.png">
-<meta property="og:updated_time" content="2018-01-07T07:30:07.000Z">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1.jpeg">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep.png">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep2.png">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep3.png">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ps1.png">
+<meta property="og:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ps2.png">
+<meta property="og:updated_time" content="2018-07-30T08:14:17.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 常用命令之grep、ps">
-<meta name="twitter:image" content="https://chengasd.github.io/chengasd.github.io/2017/12/10/Linux%20常用命令/1.jpeg">
+<meta name="twitter:image" content="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1.jpeg">
 
 
 
@@ -428,28 +428,27 @@
       
 
       
-        <img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/1.jpeg">
-<a id="more"></a>
+        <p><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1.jpeg" alt=""><br><a id="more"></a></p>
 <p>Linux命令工作后经常用到，比如定位问题查看线上日志、shell脚本等，所以学好Linux命令还是很重要的，此篇只记录工作后比较常用的命令。</p>
 <h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><blockquote>
 <p>grep是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
 </blockquote>
 <p>1、在文件中搜索单词，返回包含”test”的文本行<br>2、统计文件或者文本中包含匹配字符串的行数 -c<br>3、输出包含匹配字符串的行数 -n<br>4、搜索多个文件并查找匹配文本在哪些文件中 -l<br>5、输出除之外的所有行 -v<br>6、使用正则表达式 -E<br>7、忽略大小写 -i</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grep test filename1 filename2 filename3 --color</span><br><span class="line">grep -c test filename1=</span><br><span class="line">grep -n test filename1</span><br><span class="line">grep -l test filename1 filename2</span><br><span class="line">grep -v test filename1</span><br><span class="line">grep -E &quot;[1-9]+&quot; filename1</span><br><span class="line">grep -i TEST filename1</span><br></pre></td></tr></table></figure>
-<img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/grep.png">
+<p><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep.png" alt=""></p>
 <h3 id="常用场景"><a href="#常用场景" class="headerlink" title="常用场景"></a>常用场景</h3><p>1、查找制定进程            ps -ef|grep heso<br>2、查找指定进程个数         ps -ef|grep heso -c<br>3、找出以1开头的行内容      cat test.txt | grep ^1<br>4、找出以a结尾的行内容      cat test.txt | grep a$<br>5、显示包含1231或者1234字符的内容行      cat test.txt | grep -E “1231|1234”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep heso</span><br><span class="line">ps -ef|grep java -c</span><br><span class="line">cat test.txt | grep ^1</span><br><span class="line">cat test.txt | grep a$</span><br><span class="line">cat test.txt | grep -E &quot;1231|1234&quot;</span><br></pre></td></tr></table></figure>
-<img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/grep2.png">
+<p><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep2.png" alt=""></p>
 <p>1、显示匹配的后n行    grep  -A n<br>2、显示匹配的前n行    grep  -B n<br>3、显示匹配的前后n行   grep -C n</p>
-<img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/grep3.png">
+<p><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/grep3.png" alt=""></p>
 <h2 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h2><blockquote>
 <p>ps命令用来列出系统中当前运行的那些进程。ps命令列出的是当前那些进程的快照，就是执行ps命令的那个时刻的那些进程，如果想要动态的显示进程信息，就可以使用top命令。</p>
 </blockquote>
 <h3 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h3><p>a  显示所有进程<br>-a 显示同一终端下的所有程序<br>-A 显示所有进程<br>c  显示进程的真实名称<br>-N 反向选择<br>-e 等于“-A”<br>e  显示环境变量<br>f  显示程序间的关系<br>-H 显示树状结构<br>r  显示当前终端的进程<br>T  显示当前终端的所有程序<br>u  指定用户的所有进程<br>-au 显示较详细的资讯<br>-aux 显示所有包含其他使用者的行程<br>-C&lt;命令&gt; 列出指定命令的状况<br>–lines&lt;行数&gt; 每页显示的行数<br>–width&lt;字符数&gt; 每页显示的字符数<br>–help 显示帮助信息<br>–version 显示版本显示</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><h4 id="显示进程信息-aux"><a href="#显示进程信息-aux" class="headerlink" title="显示进程信息 aux"></a>显示进程信息 aux</h4><p>ps aux 是用BSD的格式来显示 java这个进程<br>输出：<br><img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/ps1.png"></p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><h4 id="显示进程信息-aux"><a href="#显示进程信息-aux" class="headerlink" title="显示进程信息 aux"></a>显示进程信息 aux</h4><p>ps aux 是用BSD的格式来显示 java这个进程<br>输出：<br><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ps1.png" alt=""></p>
 <p>显示的项目有：USER , PID , %CPU , %MEM , VSZ , RSS , TTY , STAT , START , TIME , COMMAND</p>
 <p>说明：<br>USER：该 process 属于那个使用者账号的<br>PID ：该 process 的号码<br>%CPU：该 process 使用掉的 CPU 资源百分比<br>%MEM：该 process 所占用的物理内存百分比<br>VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)<br>RSS ：该 process 占用的固定的内存量 (Kbytes)<br>TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。<br>STAT：该程序目前的状态，主要的状态有<br>R ：该程序目前正在运作，或者是可被运作<br>S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。<br>T ：该程序目前正在侦测或者是停止了<br>Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态<br>START：该 process 被触发启动的时间<br>TIME ：该 process 实际使用 CPU 运作的时间<br>COMMAND：该程序的实际指令</p>
-<h4 id="显示进程信息-ef"><a href="#显示进程信息-ef" class="headerlink" title="显示进程信息 -ef"></a>显示进程信息 -ef</h4><p>ps -ef 是用标准的格式显示java这个进程<br>输出：<br><img src="/chengasd.github.io/2017/12/10/Linux%20常用命令/ps2.png"><br>显示的项目有：UID , PID , PPID , C , STIME , TTY , TIME , CMD</p>
+<h4 id="显示进程信息-ef"><a href="#显示进程信息-ef" class="headerlink" title="显示进程信息 -ef"></a>显示进程信息 -ef</h4><p>ps -ef 是用标准的格式显示java这个进程<br>输出：<br><img src="https://lg-q0k3yx0g-1257042339.cos.ap-shanghai.myqcloud.com/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ps2.png" alt=""><br>显示的项目有：UID , PID , PPID , C , STIME , TTY , TIME , CMD</p>
 
       
     </div>
